@@ -23,10 +23,7 @@ script:
   - cp ./shared/simavr/simavr/obj-x86_64-linux-gnu/libsimavr.so.1 appdir/usr/lib/
   - cp ./shared/libc3/obj-x86_64-linux-gnu/.libs/libc3gl.so.0.0.1 appdir/usr/lib/
   - cp ./shared/libc3/obj-x86_64-linux-gnu/.libs/libc3.so.0.0.1 appdir/usr/lib/
-  - | ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/*.desktop -appimage \
-    -executable=appdir/usr/lib/libsimavr.so.1 \
-    -executable=appdir/usr/lib/libc3gl.so.0.0.1 \
-    -executable=appdir/usr/lib/libc3.so.0.0.1
+  - ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/*.desktop -appimage -executable=appdir/usr/lib/libsimavr.so.1 -executable=appdir/usr/lib/libc3gl.so.0.0.1 -executable=appdir/usr/lib/libc3.so.0.0.1
   - find appdir/
   
 after_success:
