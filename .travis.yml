@@ -8,10 +8,15 @@ install:
 
 script:
   - make -I shared/libc3/
+  - export LD_LIBRARY_PATH=$(find . -type f -name '*.so*' -exec dirname {} \; | sort | uniq):$LD_LIBRARY_PATH
+  - mkdir -p apdir/usr/bin/simreprap
+  - cp ./obj-x86_64-linux-gnu/reprap.elf apdir/usr/bin/simreprap
+  - mkdir -p apdir/usr/share/applications ; cp simreprap.desktop apdir/usr/share/applications/
+  - mkdir -p apdir/usr/share/icons/hicolor/apps ; touch apdir/usr/share/icons/hicolor/apps/simreprap.svg
 
 after_success:
   - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
-  - bash upload.sh APPNAME*.AppImage*
+  - bash upload.sh simreprap*.AppImage*
   
 branches:
   except:
