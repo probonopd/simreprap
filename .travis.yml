@@ -1,0 +1,19 @@
+language: cpp
+compiler: gcc
+sudo: require
+dist: trusty
+
+install:
+  - sudo apt-get -y install libdevil-dev libtool-bin libtool libfontconfig1-dev clang libelf-dev freeglut3 freeglut3-dev gcc-avr avr-libc gcc make git libcairo2-dev
+
+script:
+  - make -I shared/libc3/
+
+after_success:
+  - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+  - bash upload.sh APPNAME*.AppImage*
+  
+branches:
+  except:
+    - # Do not build tags that we create when we upload to GitHub Releases
+    - /^(?i:continuous)/
