@@ -17,7 +17,9 @@ script:
   - wget -c "https://github.com/AppImage/AppImageKit/releases/download/12/AppRun-x86_64" -O appdir/AppRun ; chmod +x appdir/AppRun
   - wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
   - chmod a+x linuxdeployqt-continuous-x86_64.AppImage
-  # export VERSION=... # linuxdeployqt uses this for naming the file
+  # Weird workaround; linuxdeployqt bug?
+  - sudo mkdir -p /usr/lib/shared/libc3/obj-x86_64-linux-gnu/.libs/sharedshared ; sudo cp shared/libc3/obj-x86_64-linux-gnu/.libs/* /usr/lib/shared/libc3/obj-x86_64-linux-gnu/.libs/sharedshared/
+  - sudo mkdir -p /usr/lib/shared/simavr/simavr/obj-x86_64-linux-gnu/sharedshared ; sudo cp shared/simavr/simavr/obj-x86_64-linux-gnu/* /usr/lib/shared/simavr/simavr/obj-x86_64-linux-gnu/sharedshared/
   - ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/*.desktop -appimage
   - find appdir/
   
