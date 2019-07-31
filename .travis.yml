@@ -4,7 +4,7 @@ sudo: require
 dist: trusty
 
 install:
-  - sudo apt-get -y install libdevil-dev libtool-bin libtool libfontconfig1-dev clang libelf-dev freeglut3 freeglut3-dev gcc-avr avr-libc gcc make git libcairo2-dev
+  - sudo apt-get -y install libdevil-dev libtool libfontconfig1-dev clang libelf-dev freeglut3 freeglut3-dev gcc-avr avr-libc gcc make git libcairo2-dev # libtool-bin
 
 script:
   - make -I shared/libc3/
