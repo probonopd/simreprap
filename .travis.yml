@@ -17,7 +17,6 @@ script:
   - wget -c "https://github.com/AppImage/AppImageKit/releases/download/12/AppRun-x86_64" -O appdir/AppRun ; chmod +x appdir/AppRun
   - wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
   - chmod a+x linuxdeployqt-continuous-x86_64.AppImage
-  - wget https://github.com/probonopd/marlin-for-ender-2/releases/download/continuous-bugfix-1.1.x/Marlin-1.1.0-RC4-2776-g7cc141007.ino.hex -O marlin/Marlin.hex
   # Weird workaround; linuxdeployqt bug?
   - mkdir -p appdir/usr/lib/
   - cp ./shared/simavr/simavr/obj-x86_64-linux-gnu/libsimavr.so.1 appdir/usr/lib/
