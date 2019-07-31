@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=simreprap
+Exec=simreprap
+Icon=simreprap
+Comment=Emulates en entire RepRap 3D printer running a Marlin firmware binary, renders it in OpenGL
+Categories=Development;
