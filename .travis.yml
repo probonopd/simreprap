@@ -10,7 +10,7 @@ script:
   - sed -i -e 's|/opt/reprap/tvrrug/Marlin/Marlin/applet/|marlin|g' src/reprap.c # FIXME
   - make -I shared/libc3/
   - export LD_LIBRARY_PATH=./shared/libc3/obj-x86_64-linux-gnu/.libs:./shared/simavr/simavr/obj-x86_64-linux-gnu:$LD_LIBRARY_PATH
-  - mkdir -p appdir/usr/bin/simreprap ; cp ./obj-x86_64-linux-gnu/reprap.elf appdir/usr/bin/simreprap ; strip appdir/usr/bin/simreprap
+  - mkdir -p appdir/usr/bin/ ; cp ./obj-x86_64-linux-gnu/reprap.elf appdir/usr/bin/simreprap ; strip appdir/usr/bin/simreprap
   - mkdir -p appdir/usr/share/applications/ ; cp simreprap.desktop appdir/usr/share/applications/
   - mkdir -p appdir/usr/share/icons/hicolor/apps ; touch appdir/usr/share/icons/hicolor/apps/simreprap.svg
   - cp -r marlin gfx appdir/usr/
