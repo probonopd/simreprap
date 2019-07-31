@@ -7,16 +7,20 @@ install:
   - sudo apt-get -y install libdevil-dev libtool libfontconfig1-dev clang libelf-dev freeglut3 freeglut3-dev gcc-avr avr-libc gcc make git libcairo2-dev # libtool-bin
 
 script:
+  - sed -i -e 's|/opt/reprap/tvrrug/Marlin/Marlin/applet/|marlin|g' src/reprap.c # FIXME
   - make -I shared/libc3/
-  - export LD_LIBRARY_PATH=$(find . -type f -name '*.so*' -exec dirname {} \; | sort | uniq):$LD_LIBRARY_PATH
-  - mkdir -p appdir/usr/bin ; cp ./obj-x86_64-linux-gnu/reprap.elf appdir/usr/bin/simreprap ; strip appdir/usr/bin/simreprap
+  - export LD_LIBRARY_PATH=./shared/libc3/obj-x86_64-linux-gnu/.libs:./shared/simavr/simavr/obj-x86_64-linux-gnu:$LD_LIBRARY_PATH
+  - mkdir -p appdir/usr/bin/simreprap ; cp ./obj-x86_64-linux-gnu/reprap.elf appdir/usr/bin/simreprap ; strip appdir/usr/bin/simreprap
   - mkdir -p appdir/usr/share/applications/ ; cp simreprap.desktop appdir/usr/share/applications/
   - mkdir -p appdir/usr/share/icons/hicolor/apps ; touch appdir/usr/share/icons/hicolor/apps/simreprap.svg
+  - cp -r marlin gfx appdir/usr/
+  - wget -c "https://github.com/AppImage/AppImageKit/releases/download/12/AppRun-x86_64" -O appdir/AppRun ; chmod +x appdir/AppRun
   - wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
   - chmod a+x linuxdeployqt-continuous-x86_64.AppImage
   # export VERSION=... # linuxdeployqt uses this for naming the file
   - ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/*.desktop -appimage
-
+  - find appdir/
+  
 after_success:
   - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
   - bash upload.sh simreprap*.AppImage*
