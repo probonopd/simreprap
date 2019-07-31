@@ -9,8 +9,7 @@ install:
 script:
   - make -I shared/libc3/
   - export LD_LIBRARY_PATH=$(find . -type f -name '*.so*' -exec dirname {} \; | sort | uniq):$LD_LIBRARY_PATH
-  - mkdir -p apdir/usr/bin/simreprap
-  - cp ./obj-x86_64-linux-gnu/reprap.elf appdir/usr/bin/simreprap ; strip appdir/usr/bin/simreprap
+  - mkdir -p appdir/usr/bin/simreprap ; cp ./obj-x86_64-linux-gnu/reprap.elf appdir/usr/bin/simreprap ; strip appdir/usr/bin/simreprap
   - mkdir -p appdir/usr/share/applications/ ; cp simreprap.desktop appdir/usr/share/applications/
   - mkdir -p appdir/usr/share/icons/hicolor/apps ; touch appdir/usr/share/icons/hicolor/apps/simreprap.svg
   - wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
